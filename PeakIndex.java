@@ -1,12 +1,5 @@
-public class PeakIndex {
-    public static void main(String[] args) {
-        int [] arr={0,2,1,0};
-        int result=peakindex(arr);
-        System.out.println(result);
-        
-    }
-
-    static int peakindex(int [] arr){
+class Solution {
+    public int peakIndexInMountainArray(int[] arr) {
         int start=0;
         int end=arr.length-1;
         while(start<end){
@@ -19,5 +12,6 @@ public class PeakIndex {
             }            
         }
         return start;
+        
     }
 }
