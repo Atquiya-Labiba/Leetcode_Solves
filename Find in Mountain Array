@@ -1,0 +1,67 @@
+/**
+ * // This is MountainArray's API interface.
+ * // You should not implement it, or speculate about its implementation
+ * interface MountainArray {
+ *     public int get(int index) {}
+ *     public int length() {}
+ * }
+ */
+ 
+class Solution {    
+           
+        
+    public int findInMountainArray(int target, MountainArray mountainArr) {
+        int peak_elem=search(mountainArr,target);
+        int asc_arr=orderAgnostic_binarySearch(mountainArr, target,0,peak_elem);
+        int len=mountainArr.length();
+        if(asc_arr!=-1){
+            return asc_arr;
+        }
+        return orderAgnostic_binarySearch(mountainArr, target,peak_elem,len-1) ;      
+
+    }
+    
+    public int search(MountainArray mountainArr,int target){
+        int len=mountainArr.length();
+        int start=0;
+        int end=len-1;
+        while(start<end){
+            int middle=start+(end-start)/2;
+            if(mountainArr.get(middle)>mountainArr.get(middle+1)){
+                end=middle;
+            }
+            else {
+                start=middle+1;
+            }            
+        }
+        return start;       
+    } 
+    
+    public int orderAgnostic_binarySearch(MountainArray mountainArr, int target,int start,int end) {       
+
+        boolean isAsc = mountainArr.get(start )< mountainArr.get(end);
+
+        while (start <= end) {
+            int middle = start + (end - start) / 2;
+
+            if (target == mountainArr.get(middle)) {
+                return middle;
+            }
+            if (isAsc) {
+                if (target < mountainArr.get(middle)) {
+                    end = middle - 1;
+                } else if (target > mountainArr.get(middle)) {
+                    start = middle + 1;
+                }
+            } else {
+                if (target > mountainArr.get(middle)) {
+                    end = middle - 1;
+                } else {
+                    start = middle + 1;
+                }
+
+            }
+        }
+        return -1;
+    }
+}
