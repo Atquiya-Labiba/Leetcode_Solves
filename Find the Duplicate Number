@@ -1,0 +1,27 @@
+class Solution {
+    public int findDuplicate(int[] nums) {
+        int i = 0;
+        while (i < nums.length) {
+            int sort_ind = nums[i] - 1;  //represents correct index which is index=value-1
+            if (nums[i] != nums[sort_ind]) {
+                swap(nums, i, sort_ind);
+            } else {
+                if(i!=sort_ind){  //if there is duplicate then i will be not equal to sort index
+                    return nums[i];
+                }
+                else{
+                    i++;
+                }
+                
+            }
+        }        
+        return -1;
+    }
+
+    static void swap(int[] nums, int item1, int item2) {
+        int temp = nums[item1];
+        nums[item1] = nums[item2];
+        nums[item2] = temp;
+    }
+        
+}
