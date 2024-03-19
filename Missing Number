@@ -1,0 +1,26 @@
+class Solution {
+    public int missingNumber(int[] nums) {
+    int i = 0;
+        while (i < nums.length) {
+            int sort_ind = nums[i];
+            if (nums[i] < nums.length && nums[i] != nums[sort_ind]) {
+                swap(nums, i, sort_ind);
+            }
+            else {
+                i++;
+            }
+        }
+        for(int elem=0;elem<nums.length;elem++){
+            if(nums[elem]!=elem){
+                return elem;
+            }
+        }
+        return nums.length;
+    }
+
+    public void swap(int[] nums, int item1, int item2) {
+        int temp = nums[item1];
+        nums[item1] = nums[item2];
+        nums[item2] = temp;
+    }
+}
